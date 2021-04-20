@@ -16,4 +16,4 @@ Google Firebase Authentication demo.
 ![Screenshot](/screenshot1.png?raw=true)
 
 ### Dashboard
-![Screenshot](/screenshot.png?raw=true)
+![Screenshot](/screenshot2.png?raw=true)
