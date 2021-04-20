@@ -4,11 +4,13 @@ Google Firebase Authentication demo.
 
 ## Methods
 
-- signIn
-- signOut
-= updateDisplayName
-- updateEmail
-- updatePassword
+- register => firebase.auth().createUserWithEmailAndPassword()
+- signIn => firebase.auth().signInWithEmailAndPassword()
+- signOut => firebase.auth().signout()
+
+= updateDisplayName => this.authUser.updateProfile()
+- updateEmail => this.authUser.updateEmail()
+- updatePassword => this.authUser.updatePassword()
 
 ## Screenshots
 
