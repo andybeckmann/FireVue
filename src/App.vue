@@ -92,7 +92,7 @@ p {
 .app--header {
 	display: flex;
 	justify-content: space-between;
-	padding: 25px;
+	padding: 25px 0 25px 25px;
 	background: #111;
 
 	.app--header-logo {
@@ -135,7 +135,7 @@ p {
 .app--main {
 	max-width: 1080px;
 	margin: 0 auto;
-	padding: 50px 0;
+	padding: 25px 0;
 	border-radius: 4px;
 }
 </style>
