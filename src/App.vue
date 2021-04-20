@@ -5,12 +5,18 @@
 				<router-link to="/">VUE+FIREBASE-AUTH</router-link>
 			</div>
 			<div class="app--header-nav">
+				<router-link to="/">Dashboard</router-link>
 				<router-link to="/privacy">Privacy</router-link>
 			</div>
 		</div>
+		
 		<router-view/>
 	</div>
 </template>
+
+<script>
+
+</script>
 
 <style lang="scss">
 * {
