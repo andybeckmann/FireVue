@@ -2,7 +2,7 @@
 	<div>
 		<div class="app--primary-header">
 			<AppLogo />
-			<AppNav />
+			<AppNav :user="this.authUser" />
 		</div>
 		<div class="app--secondary-header" v-if="authUser">
 			<p>Signed in as: <b>{{ authUser.email }}</b></p>

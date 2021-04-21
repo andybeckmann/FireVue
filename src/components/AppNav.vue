@@ -1,12 +1,12 @@
 <template>
 	<div class="app--header-nav">
-		<nav>
+		<nav v-if="user != null">
 			<ul>
 				<li>
-					<router-link to="/">Dashboard</router-link>
+					<router-link to="/dashboard">Dashboard</router-link>
 				</li>
 				<li>
-					<router-link to="/settings">Settings</router-link>
+					<router-link to="/">Settings</router-link>
 				</li>
 			</ul>
 		</nav>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-
+	props: ['user']
 }
 </script>
 
