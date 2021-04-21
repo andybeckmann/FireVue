@@ -1,9 +1,5 @@
 <template>
 	<div>
-		<div class="app--main-settings-header">
-			<p>Signed in as: <b>{{ authUser.email }}</b></p>
-			<button @click="signOut">Sign out</button>
-		</div>
 		<h1>Dashboard</h1>
 		<p>{{ this.authUser.userData }}</p>
 		<form @submit.prevent="updateUserData">

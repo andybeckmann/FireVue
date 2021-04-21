@@ -1,10 +1,6 @@
 <template>
 	<div>
 		<div class="app--main-settings" v-if="authUser">
-			<div class="app--main-settings-header">
-				<p>Signed in as: <b>{{ authUser.email }}</b></p>
-				<button @click="signOut">Sign out</button>
-			</div>
 			<h1>Settings</h1>
 			<form @submit.prevent="updateProfile">
 				<h2>Update Profile</h2>
