@@ -140,6 +140,13 @@ export default {
 	padding: 5px 5px 5px 15px;
 }
 
+.app--main-settings {
+	h2 {
+		border-top: 1px solid #ccc;
+		padding-top: 25px;
+	}
+}
+
 .app--main-auth {
 	max-width: 550px;
 	margin: 0 auto;
