@@ -2,7 +2,9 @@
 	<div id="app">
 		<AppHeader />
 		<div class="app--main">
-			<router-view/>
+			<transition name="slideFade" mode="out-in">
+				<router-view/>
+			</transition>
 		</div>
 		<AppFooter />
 	</div>
@@ -65,6 +67,14 @@ button {
 	font-weight: bold;
 	background: linear-gradient(0deg, #111, #444);
 	cursor: pointer;
+
+	&:hover {
+		background: #222;
+	}
+
+	&:active {
+		background: #000;
+	}
 }
 
 p {
@@ -93,4 +103,14 @@ a {
 		border-radius: 4px;
 	}
 }
+
+.slideFade-enter-active, .slideFade-leave-active {
+	transition: opacity .75s, transform .75s
+}
+
+.slideFade-enter, .slideFade-leave-to {
+	opacity: 0;
+	transform: translateX(-25%);
+}
+
 </style>
