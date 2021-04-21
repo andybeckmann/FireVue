@@ -1,36 +1,26 @@
 <template>
 	<div id="app">
-		<div class="app--header">
-			<div class="app--header-logo">
-				<router-link to="/">FireVue</router-link>
-			</div>
-			<div class="app--header-nav">
-				<nav>
-					<ul>
-						<li>
-							<router-link to="/">Dashboard</router-link>
-						</li>
-						<li>
-							<router-link to="/settings">Settings</router-link>
-						</li>
-						<li>
-							<router-link to="/privacy">Privacy</router-link>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
+		<AppHeader />
 		<div class="app--main">
 			<router-view/>
 		</div>
+		<AppFooter />
 	</div>
 </template>
 
 <script>
+import AppHeader from '@/components/AppHeader.vue'
+import AppFooter from '@/components/AppFooter.vue'
 
+export default {
+	components: {
+		AppHeader, AppFooter
+	}
+}
 </script>
 
 <style lang="scss">
+// Global
 * {
 	box-sizing: border-box;
 }
@@ -82,60 +72,25 @@ p {
 	line-height: 27px;
 }
 
+a {
+	text-decoration: none;
+	color: #111;
+}
+
 #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: #111;
-}
+	position: relative;
+    padding-bottom: 75px;
+    min-height: 100vh;
 
-.app--header {
-	display: flex;
-	justify-content: space-between;
-	padding: 25px 0 25px 25px;
-	background: #111;
-
-	.app--header-logo {
-		color: #fff;
-		font-weight: bold;
-
-		a {
-			color: #fff;
-			text-decoration: none;
-		}
+	.app--main {
+		max-width: 1080px;
+		margin: 0 auto;
+		padding: 25px 0;
+		border-radius: 4px;
 	}
-
-	.app--header-nav {
-		ul {
-			margin: 0;
-			padding: 0;
-			list-style-type: none;
-			display: flex;
-
-			li:first-child a {
-				border-left: 1px solid #222;
-			}
-
-			a {
-				font-weight: bold;
-				color: #fff;
-				text-decoration: none;
-				padding: 25px;
-				border-right: 1px solid #222;
-
-				&.router-link-exact-active {
-					color: #eee;
-					background: #222;
-				}
-			}
-		}
-	}
-}
-
-.app--main {
-	max-width: 1080px;
-	margin: 0 auto;
-	padding: 25px 0;
-	border-radius: 4px;
 }
 </style>
