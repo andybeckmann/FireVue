@@ -18,6 +18,8 @@ export default {
 	a {
 		color: #fff;
 		text-decoration: none;
+		line-height: 24px;
+		font-size: 20px;
 	}
 }
 </style>
