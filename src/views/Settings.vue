@@ -22,6 +22,7 @@
 			</form>
 		</div>
 		<div class="app--main-auth" v-else>
+			<div class="app--main-auth-error-message" v-if="signInInvalid">E-mail or password invalid.</div>
 			<div class="app--main-auth-signup" v-if="registered == false">
 			<h1>Register</h1>
 				<form @submit.prevent="register">
@@ -89,6 +90,9 @@ export default {
 			passwordHasBeenUpdated: false,
 			passwordIsInvalid: false,
 
+			signInInvalid: false,
+			signInErrorMessage: '',
+
 			errorMessage: ''
 		}
 	},
@@ -105,7 +109,10 @@ export default {
 
 		signIn() {
 			firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-				.catch(error => alert(error.message))
+				.catch(error => {
+					this.signInInvalid = true,
+					this.signInErrorMessage = error.message
+				})
 		},
 
 		updateProfile () {
@@ -188,6 +195,17 @@ export default {
 	margin: 0 auto;
 	box-shadow: 0 25px 25px rgba(0, 0, 0, 0.10);
 	padding: 50px;
+	position: relative;
+
+	.app--main-auth-error-message {
+		background: #f2c0c0;
+		width: calc(100% - 100px);
+		position: absolute;
+		top:-10px;
+		padding: 15px;
+		border-radius: 4px;
+		text-align: center;
+	}
 
 	h1 {
 		font-family: serif;
