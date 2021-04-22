@@ -6,19 +6,19 @@
 				<h2>Update Profile</h2>
 				<label>Name</label>
 				<input v-model="displayName" placeholder="John Smith">
-				<button>Update</button>
+				<button>Update</button> <span class="form-success" v-if="nameHasBeenUpdated">Your name has been updated.</span>
 			</form>
 			<form @submit.prevent="updateEmail">
 				<h2>Update Email</h2>
 				<label>E-mail</label>
 				<input v-model="email" placeholder="Your Email">
-				<button>Update</button>
+				<button>Update</button> <span class="form-success" v-if="emailHasBeenUpdated">Your E-mail has been updated.</span><span class="form-error" v-if="emailIsInvalid">{{ this.errorMessage }}</span>
 			</form>
 			<form @submit.prevent="updatePassword">
 				<h2>Update Password</h2>
 				<label>New Password</label>
 				<input v-model="newPassword" type="password" placeholder="••••••••••">
-				<button>Update</button>
+				<button>Update</button> <span class="form-success" v-if="passwordHasBeenUpdated">Your password has been updated.</span><span class="form-error" v-if="passwordIsInvalid">{{ this.errorMessage }}</span>
 			</form>
 		</div>
 		<div class="app--main-auth" v-else>
@@ -71,17 +71,32 @@ export default {
 		return {
 			email: '',
 			password: '',
+
 			authUser: null,
+
 			registered: true,
+
 			photoURL: null,
 			displayName: null,
-			newPassword: null
+			newPassword: null,
+
+			nameHasBeenUpdated: false,
+			nameIsInvalid: false,
+
+			emailHasBeenUpdated: false,
+			emailIsInvalid: false,
+
+			passwordHasBeenUpdated: false,
+			passwordIsInvalid: false,
+
+			errorMessage: ''
 		}
 	},
 
 	methods: {
 		register () {
 			firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+				.catch(error => alert(error.message))
 		},
 
 		signOut () {
@@ -94,21 +109,36 @@ export default {
 		},
 
 		updateProfile () {
-			this.authUser.updateProfile({
-				displayName: this.displayName,
-				photoURL: this.photoURL
-			})
+			this.authUser.updateProfile({ displayName: this.displayName, photoURL: this.photoURL})
+				.then(() => { this.nameHasBeenUpdated = true })
+				.catch(error => alert(error.message))
 		},
 
 		updateEmail () {
 			this.authUser.updateEmail(this.email)
-				.catch(error => alert(error.message))
+				.then(() => { 
+					this.emailHasBeenUpdated = true,
+					this.emailIsInvalid = false 
+				})
+				.catch(error => {
+					this.emailIsInvalid = true,
+					this.emailHasBeenUpdated = false,
+					this.errorMessage = error.message
+				})
 		},
 
 		updatePassword () {
 			this.authUser.updatePassword(this.newPassword)
-				.then(() => { this.newPassword = null })
-				.catch(error => alert(error.message))
+				.then(() => { 
+					this.newPassword = null, 
+					this.passwordHasBeenUpdated = true
+					this.passwordIsInvalid = false
+				})
+				.catch(error => {
+					this.passwordHasBeenUpdated = false
+					this.passwordIsInvalid = true
+					this.errorMessage = error.message
+				})
 		}
 	},
 
@@ -140,6 +170,16 @@ export default {
 	h2 {
 		border-top: 1px solid #ccc;
 		padding-top: 25px;
+	}
+
+	span.form-success {
+		color: #68b88d;
+		font-weight: bold;
+	}
+
+	span.form-error {
+		color: #d97087;
+		font-weight: bold;
 	}
 }
 
