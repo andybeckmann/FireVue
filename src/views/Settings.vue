@@ -6,23 +6,23 @@
 				<h2>Update Profile</h2>
 				<label>Name</label>
 				<input v-model="displayName" placeholder="John Smith">
-				<button>Update</button> <span class="form-success" v-if="nameHasBeenUpdated">Your name has been updated.</span>
+				<button>Update</button> <span class="form-success" v-if="nameHasBeenUpdated">Your name has been updated.</span><span class="form-error" v-if="nameIsInvalid">{{ nameErrorMessage }}</span>
 			</form>
 			<form @submit.prevent="updateEmail">
 				<h2>Update Email</h2>
 				<label>E-mail</label>
 				<input v-model="email" placeholder="Your Email">
-				<button>Update</button> <span class="form-success" v-if="emailHasBeenUpdated">Your E-mail has been updated.</span><span class="form-error" v-if="emailIsInvalid">{{ this.errorMessage }}</span>
+				<button>Update</button> <span class="form-success" v-if="emailHasBeenUpdated">Your E-mail has been updated</span><span class="form-error" v-if="emailIsInvalid">{{ emailErrorMessage }}</span>
 			</form>
 			<form @submit.prevent="updatePassword">
 				<h2>Update Password</h2>
 				<label>New Password</label>
 				<input v-model="newPassword" type="password" placeholder="••••••••••">
-				<button>Update</button> <span class="form-success" v-if="passwordHasBeenUpdated">Your password has been updated.</span><span class="form-error" v-if="passwordIsInvalid">{{ this.errorMessage }}</span>
+				<button>Update</button> <span class="form-success" v-if="passwordHasBeenUpdated">Your password has been updated</span><span class="form-error" v-if="passwordIsInvalid">{{ passwordErrorMessage }}</span>
 			</form>
 		</div>
 		<div class="app--main-auth" v-else>
-			<div class="app--main-auth-error-message" v-if="signInInvalid">E-mail or password invalid.</div>
+			<div class="app--main-auth-error-message" v-if="signInInvalid">E-mail or password invalid</div>
 			<div class="app--main-auth-signup" v-if="registered == false">
 			<h1>Register</h1>
 				<form @submit.prevent="register">
@@ -83,17 +83,18 @@ export default {
 
 			nameHasBeenUpdated: false,
 			nameIsInvalid: false,
+			nameErrorMessage: '',
 
 			emailHasBeenUpdated: false,
 			emailIsInvalid: false,
+			emailErrorMessage: '',
 
 			passwordHasBeenUpdated: false,
 			passwordIsInvalid: false,
+			passwordErrorMessage: '',
 
 			signInInvalid: false,
 			signInErrorMessage: '',
-
-			errorMessage: ''
 		}
 	},
 
@@ -110,41 +111,48 @@ export default {
 		signIn() {
 			firebase.auth().signInWithEmailAndPassword(this.email, this.password)
 				.catch(error => {
-					this.signInInvalid = true,
+					this.signInInvalid = true
 					this.signInErrorMessage = error.message
 				})
 		},
 
 		updateProfile () {
 			this.authUser.updateProfile({ displayName: this.displayName, photoURL: this.photoURL})
-				.then(() => { this.nameHasBeenUpdated = true })
-				.catch(error => alert(error.message))
+				.then(() => { 
+					this.nameHasBeenUpdated = true
+					this.nameIsInvalid = false 
+				})
+				.catch(error => {
+					this.nameIsInvalid = true
+					this.nameHasBeenUpdated = false
+					this.emailErrorMessage = error.message
+				})
 		},
 
 		updateEmail () {
 			this.authUser.updateEmail(this.email)
 				.then(() => { 
-					this.emailHasBeenUpdated = true,
+					this.emailHasBeenUpdated = true
 					this.emailIsInvalid = false 
 				})
 				.catch(error => {
-					this.emailIsInvalid = true,
-					this.emailHasBeenUpdated = false,
-					this.errorMessage = error.message
+					this.emailIsInvalid = true
+					this.emailHasBeenUpdated = false
+					this.emailErrorMessage = error.message
 				})
 		},
 
 		updatePassword () {
 			this.authUser.updatePassword(this.newPassword)
 				.then(() => { 
-					this.newPassword = null, 
+					this.newPassword = null
 					this.passwordHasBeenUpdated = true
 					this.passwordIsInvalid = false
 				})
 				.catch(error => {
 					this.passwordHasBeenUpdated = false
 					this.passwordIsInvalid = true
-					this.errorMessage = error.message
+					this.passwordErrorMessage = error.message
 				})
 		}
 	},
@@ -205,6 +213,18 @@ export default {
 		padding: 15px;
 		border-radius: 4px;
 		text-align: center;
+		opacity: 0;
+		animation: errorMessageFadeIn .15s linear forwards;
+	}
+
+	@keyframes errorMessageFadeIn {
+		0% {
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 1;
+		}
 	}
 
 	h1 {
