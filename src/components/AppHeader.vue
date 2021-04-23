@@ -66,15 +66,25 @@ export default {
 }
 
 .app--secondary-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 	background: #eee;
 	border-radius: 4px;
-	padding: 5px 5px 5px 25px;
+	padding: 10px 25px;
+	text-align: center;
+
+	@media (min-width: 768px) {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 5px 5px 5px 25px;
+	}
 
 	button {
-		margin-right: 20px;
+		width: 100%;
+
+		@media (min-width: 768px) {
+			width: auto;
+			margin-right: 20px;
+		}
 	}
 }
 </style>

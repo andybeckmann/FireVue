@@ -182,6 +182,9 @@ export default {
 }
 
 .app--main-settings {
+	@media (min-width: 768px) {
+		margin: 0 25px;
+	}
 	h2 {
 		border-top: 1px solid #ccc;
 		padding-top: 25px;
@@ -234,9 +237,12 @@ export default {
 
 	form {
 		div {
-			display: flex;
 			justify-content: space-between;
 			align-items: center;
+
+			@media (min-width: 768px) {
+				display: flex;
+			}
 
 			a {
 				text-decoration: none;

@@ -48,11 +48,14 @@ input {
 	font-size: 18px;
 	width: 100%;
 	border-radius: 4px;
-	max-width: 540px;
 	display: block;
 	box-shadow: 	
 				0 3px 3px rgba(0, 0, 0, 0.05),
 				inset 0px 10px 10px #eee;
+
+	@media (min-width: 768px) {
+		max-width: 540px;
+	}
 }
 
 button {
@@ -66,6 +69,11 @@ button {
 	font-weight: bold;
 	background: linear-gradient(0deg, #111, #444);
 	cursor: pointer;
+	width: 100%;
+
+	@media (min-width: 768px) {
+		width: auto;
+	}
 
 	&:hover {
 		background: #222;
@@ -98,8 +106,12 @@ a {
 	.app--main {
 		max-width: 1080px;
 		margin: 0 auto;
-		padding: 25px 0;
+		padding: 25px;
 		border-radius: 4px;
+
+		@media (min-width: 768px) {
+			padding: 25px 0;
+		}
 	}
 }
 
