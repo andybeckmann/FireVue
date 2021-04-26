@@ -30,10 +30,10 @@ FireVue is a Google Firebase Authentication and RTDB demo using Vue.
 ## Screenshots
 
 ### Sign in
-![Screenshot](/screenshot1.png?raw=true)
+![Screenshot](/signin.png?raw=true)
 
 ### Settings
-![Screenshot](/screenshot2.png?raw=true)
+![Screenshot](/settings.png?raw=true)
 
 ### Dashboard
-![Screenshot](/screenshot3.png?raw=true)
+![Screenshot](/dashboard.png?raw=true)
