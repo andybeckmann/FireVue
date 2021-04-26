@@ -38,6 +38,9 @@ export default {
 
 		signOut () {
 			firebase.auth().signOut()
+			.then( () => {
+				this.$router.push({ name: 'Settings' })
+			})
 		}
 	},
 
