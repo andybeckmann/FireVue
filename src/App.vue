@@ -56,6 +56,10 @@ input {
 	@media (min-width: 768px) {
 		max-width: 540px;
 	}
+
+	&:focus {
+		border: 1px solid #11db11;
+	}
 }
 
 button {
