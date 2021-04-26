@@ -2,6 +2,13 @@
 
 FireVue is a Google Firebase Authentication and RTDB demo using Vue.
 
+## Features
+
+- Firebase Authentication
+- Firebase Real-time Database
+- Form input validation
+- Vue page transition animations
+
 ## Methods
 
 ### Sign in
